@@ -88,6 +88,40 @@ const observer = new IntersectionObserver((entries) => {
 
 animatedEls.forEach(el => observer.observe(el));
 
+/* ===== HERO COUNTERS ===== */
+const counters = document.querySelectorAll('.count-up');
+
+function animateCounter(counter) {
+  const target = Number(counter.dataset.count);
+  const duration = 900;
+  const startTime = performance.now();
+
+  function updateCounter(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const easedProgress = 1 - Math.pow(1 - progress, 3);
+    counter.textContent = Math.round(target * easedProgress);
+
+    if (progress < 1) {
+      requestAnimationFrame(updateCounter);
+    }
+  }
+
+  requestAnimationFrame(updateCounter);
+}
+
+if (counters.length) {
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.6 });
+
+  counters.forEach(counter => counterObserver.observe(counter));
+}
+
 /* ===== CONTACT FORM VALIDATION ===== */
 const contactForm = document.getElementById('contactForm');
 const formSuccess = document.getElementById('formSuccess');
@@ -114,60 +148,64 @@ function clearError(fieldId, errorId) {
   }
 });
 
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-  const name    = document.getElementById('name').value.trim();
-  const email   = document.getElementById('email').value.trim();
-  const subject = document.getElementById('subject').value.trim();
-  const message = document.getElementById('message').value.trim();
-  let valid = true;
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+    let valid = true;
 
-  clearError('name',    'nameError');
-  clearError('email',   'emailError');
-  clearError('subject', 'subjectError');
-  clearError('message', 'messageError');
+    clearError('name',    'nameError');
+    clearError('email',   'emailError');
+    clearError('subject', 'subjectError');
+    clearError('message', 'messageError');
 
-  if (!name) {
-    showError('name', 'nameError', 'Name is required.');
-    valid = false;
-  }
+    if (!name) {
+      showError('name', 'nameError', 'Name is required.');
+      valid = false;
+    }
 
-  if (!email) {
-    showError('email', 'emailError', 'Email is required.');
-    valid = false;
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showError('email', 'emailError', 'Please enter a valid email address.');
-    valid = false;
-  }
+    if (!email) {
+      showError('email', 'emailError', 'Email is required.');
+      valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('email', 'emailError', 'Please enter a valid email address.');
+      valid = false;
+    }
 
-  if (!subject) {
-    showError('subject', 'subjectError', 'Subject is required.');
-    valid = false;
-  }
+    if (!subject) {
+      showError('subject', 'subjectError', 'Subject is required.');
+      valid = false;
+    }
 
-  if (!message) {
-    showError('message', 'messageError', 'Message is required.');
-    valid = false;
-  } else if (message.length < 10) {
-    showError('message', 'messageError', 'Message must be at least 10 characters.');
-    valid = false;
-  }
+    if (!message) {
+      showError('message', 'messageError', 'Message is required.');
+      valid = false;
+    } else if (message.length < 10) {
+      showError('message', 'messageError', 'Message must be at least 10 characters.');
+      valid = false;
+    }
 
-  if (!valid) return;
+    if (!valid) return;
 
-  const submitBtn = contactForm.querySelector('button[type="submit"]');
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-  setTimeout(() => {
-    contactForm.reset();
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-    formSuccess.classList.add('show');
-    setTimeout(() => formSuccess.classList.remove('show'), 5000);
-  }, 1200);
-});
+    setTimeout(() => {
+      contactForm.reset();
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+      if (formSuccess) {
+        formSuccess.classList.add('show');
+        setTimeout(() => formSuccess.classList.remove('show'), 5000);
+      }
+    }, 1200);
+  });
+}
 
 /* ===== SMOOTH SCROLL FOR ANCHOR LINKS ===== */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

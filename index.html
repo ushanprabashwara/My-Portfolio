@@ -11,6 +11,440 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== SPORTS ===== */
+    .sports-section {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.74)),
+        url("sport-background.png") center / cover no-repeat;
+      color: #fff;
+    }
+
+    .sports-section .section-heading h2,
+    .sports-section .section-heading p {
+      color: #fff;
+    }
+
+    .sports-section .section-heading p {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .sports-overview {
+      display: grid;
+      grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.6fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .sports-highlight {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 16px 40px rgba(2, 6, 23, 0.28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .sports-highlight-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.45rem;
+      margin-bottom: 18px;
+    }
+
+    .sports-highlight h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .sports-highlight p {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .sports-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .sports-stat {
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 14px;
+    }
+
+    .sports-stat strong {
+      display: block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.1;
+      color: #fff;
+    }
+
+    .sports-stat span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.78rem;
+    }
+
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .achievement-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      border-radius: var(--radius);
+      padding: 18px;
+      color: var(--text);
+      box-shadow: 0 10px 28px rgba(2, 6, 23, 0.18);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(2, 6, 23, 0.25);
+    }
+
+    .achievement-card.featured {
+      border-color: rgba(20, 184, 166, 0.7);
+      background: linear-gradient(135deg, #ffffff, #ecfeff);
+    }
+
+    .achievement-rank {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 1px solid rgba(37, 99, 235, 0.2);
+    }
+
+    .achievement-card.featured .achievement-rank {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .achievement-card h3 {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .achievement-card p {
+      color: var(--text-muted);
+      font-size: 0.83rem;
+      line-height: 1.55;
+    }
+
+    [data-theme="dark"] .achievement-card {
+      background: rgba(31, 41, 55, 0.94);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    [data-theme="dark"] .achievement-card.featured {
+      background: linear-gradient(135deg, rgba(31, 41, 55, 0.96), rgba(15, 118, 110, 0.45));
+    }
+
+    @media (max-width: 900px) {
+      .sports-overview {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .achievement-grid,
+      .sports-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .achievement-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== PORTFOLIO HIGHLIGHTS ===== */
+    .hero-highlights {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      max-width: 680px;
+      margin: 0 auto 34px;
+    }
+
+    .hero-highlight {
+      min-height: 124px;
+      padding: 20px 18px;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(20, 184, 166, 0.06)),
+        var(--card-bg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+
+    .hero-highlight:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(37, 99, 235, 0.3);
+    }
+
+    .hero-highlight i {
+      color: var(--accent);
+      font-size: 1.15rem;
+    }
+
+    .hero-highlight strong {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 3px;
+      color: var(--primary);
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .hero-highlight .stat-label {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      font-weight: 500;
+      line-height: 1.35;
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .hero-highlight .stat-prefix,
+    .hero-highlight .stat-suffix {
+      font-size: 0.62em;
+      line-height: 1;
+    }
+
+    .sport-tagline {
+      max-width: 760px;
+      margin: 32px auto 0;
+      padding: 20px 24px;
+      border-left: 4px solid var(--accent);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 640px) {
+      .hero-highlights {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+      }
+    }
+
+    .hero .avatar {
+      width: 340px;
+      height: 340px;
+      aspect-ratio: 1 / 1;
+    }
+
+    .hero .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 32%;
+      transform: scale(1.22);
+      transform-origin: center 32%;
+    }
+
+    @media (max-width: 900px) {
+      .hero .avatar {
+        width: 240px;
+        height: 240px;
+      }
+    }
+
+    /* ===== ENHANCED RESUME ===== */
+    .resume-showcase {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.9fr) minmax(280px, 1fr);
+      gap: 36px;
+      align-items: center;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .resume-preview-link {
+      position: relative;
+      display: block;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .resume-preview-link:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(37, 99, 235, 0.35);
+    }
+
+    .resume-preview-img {
+      width: 100%;
+      aspect-ratio: 0.72 / 1;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .resume-preview-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.64);
+      color: #fff;
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .resume-preview-link:hover .resume-preview-overlay {
+      opacity: 1;
+    }
+
+    .resume-preview-overlay span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .resume-panel {
+      text-align: left;
+    }
+
+    .resume-panel h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .resume-panel > p {
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      line-height: 1.7;
+    }
+
+    .resume-highlights {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .resume-highlight {
+      padding: 16px 14px;
+      border-radius: var(--radius);
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .resume-highlight strong {
+      display: block;
+      color: var(--primary);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .resume-highlight span {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .resume-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .resume-updated {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+    }
+
+    .resume-updated i {
+      color: var(--accent);
+    }
+
+    @media (max-width: 820px) {
+      .resume-showcase {
+        grid-template-columns: 1fr;
+        max-width: 560px;
+      }
+
+      .resume-panel {
+        text-align: center;
+      }
+
+      .resume-actions {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .resume-highlights {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -25,12 +459,13 @@
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#experience" class="nav-link">Experience</a></li>
         <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#sports" class="nav-link">Sports</a></li>
         <li><a href="#certifications" class="nav-link">Certifications</a></li>
         <li><a href="#resume" class="nav-link">Resume</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
       <div class="nav-actions">
-        <a href="https://github.com/" target="_blank" class="nav-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://github.com/ushanprabashwara" target="_blank" class="nav-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
         <a href="https://www.linkedin.com/in/ushan-prabashwara-a091842aa" target="_blank" class="nav-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ushanprabashwara@gmail.com" class="nav-icon" aria-label="Email" target="_blank" rel="noopener noreferrer"><i class="fas fa-envelope"></i></a>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
@@ -49,17 +484,34 @@
     <div class="hero-content animate-fade-up">
       <div class="hero-left">
         <h1 class="hero-name">Ushan Prabashwara</h1>
-        <p class="hero-title">Information Technology Undergraduate | Aspiring Software Developer</p>
+        <p class="hero-title">Information Technology Undergraduate | Aspiring Software Developer | National-Level Badminton Player</p>
         <p class="hero-bio">
-          Passionate IT undergraduate with an interest in software development, web technologies,
-          and problem-solving. I enjoy building practical applications and continuously expanding
-          my technical skills.
+          I build practical software with the same discipline, focus, and competitive mindset
+          I bring to badminton. My interests include software development, web technologies,
+          and problem-solving.
         </p>
+        <div class="hero-highlights">
+          <div class="hero-highlight">
+            <i class="fas fa-code"></i>
+            <strong><span class="count-up" data-count="4">0</span><span class="stat-suffix">+</span></strong>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="hero-highlight">
+            <i class="fas fa-medal"></i>
+            <strong><span class="count-up" data-count="10">0</span><span class="stat-suffix">+</span></strong>
+            <span class="stat-label">Badminton achievements</span>
+          </div>
+          <div class="hero-highlight">
+            <i class="fas fa-trophy"></i>
+            <strong><span class="stat-prefix">No.</span><span class="count-up" data-count="21">0</span></strong>
+            <span class="stat-label">National ranking</span>
+          </div>
+        </div>
         <div class="hero-btns">
           <a href="#projects" class="btn btn-primary"><i class="fas fa-arrow-down"></i> View Projects</a>
         </div>
       </div>
-      <div class="avatar"><img src="My photo.jpeg" alt="Ushan Prabashwara" class="avatar-img" /></div>
+      <div class="avatar"><img src="My Photo.jpg" alt="Ushan Prabashwara" class="avatar-img" /></div>
     </div>
   </section>
 
@@ -109,7 +561,7 @@
             </div>
             <div class="info-item">
               <i class="fas fa-futbol"></i>
-              <span>Badminton Player (Open Men's Singles Current National Ranking 22)</span>
+              <span>Badminton Player (Open Men's Singles Current National Ranking 21)</span>
             </div>
             <div class="info-item">
               <i class="fas fa-envelope"></i>
@@ -322,7 +774,7 @@
             </div>
             <h3>National Badminton Player</h3>
             <p class="timeline-org">Selected to National Junior Badminton Pool in 2015 </p>
-              <p> Current National Ranking - Open Men's Singles No.22 </p>
+              <p> Current National Ranking - Open Men's Singles No.21 </p>
             <p>2023 School Badminton Captain. Won the 1st Place on National School Games 2023. National Sport Colorsman.</p>
           </div>
         </div>
@@ -357,6 +809,7 @@
           <h3>Bachelor of Information Technology</h3>
           <p class="edu-uni">Sri Lanka Institute of Information Technology</p>
           <p class="edu-year">Expected Graduation: 2029</p>
+          <p class="edu-year">Current GPA: 3.52</p>
           <div class="edu-courses">
             <h4>Relevant Coursework</h4>
             <div class="course-tags">
@@ -394,6 +847,132 @@
     </div>
   </section>
 
+  <!-- SPORTS -->
+  <section id="sports" class="section sports-section">
+    <div class="container">
+      <div class="section-heading animate-on-scroll">
+        <h2>Sports Achievements</h2>
+        <p>Top 10 badminton milestones from my competitive journey.</p>
+      </div>
+
+      <div class="sports-overview">
+        <div class="sports-highlight animate-on-scroll">
+          <div class="sports-highlight-icon"><i class="fas fa-medal"></i></div>
+          <h3>Badminton Journey</h3>
+          <p>
+            Competitive badminton has shaped my discipline, focus, leadership, and resilience
+            through school, all-island, open-level, and national-level achievements.
+          </p>
+          <div class="sports-stats">
+            <div class="sports-stat">
+              <strong>10</strong>
+              <span>Top achievements</span>
+            </div>
+            <div class="sports-stat">
+              <strong>2023</strong>
+              <span>Captaincy year</span>
+            </div>
+            <div class="sports-stat">
+              <strong>U20</strong>
+              <span>School champions</span>
+            </div>
+            <div class="sports-stat">
+              <strong>No.21</strong>
+              <span>Open men's singles ranking</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="achievement-grid">
+          <div class="achievement-card featured animate-on-scroll">
+            <span class="achievement-rank">01</span>
+            <div>
+              <h3>National School Games 2023</h3>
+              <p>U20 Boys Champions.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card animate-on-scroll">
+            <span class="achievement-rank">02</span>
+            <div>
+              <h3>School Badminton Captain</h3>
+              <p>Served as school badminton captain in 2023.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card animate-on-scroll">
+            <span class="achievement-rank">03</span>
+            <div>
+              <h3>Otter Aquatic Club Open Level 1 Ranking Badminton Championship 2023</h3>
+              <p>Open Men's Singles Semifinalist.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card animate-on-scroll">
+            <span class="achievement-rank">04</span>
+            <div>
+              <h3>Summer Season All Island Open Badminton Championship 2023</h3>
+              <p>U19 Boys Singles Semifinalist.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card animate-on-scroll">
+            <span class="achievement-rank">05</span>
+            <div>
+              <h3>NCPBA All Island Open Badminton Championships 2023</h3>
+              <p>Open Men's Singles Quarterfinalist.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card animate-on-scroll">
+            <span class="achievement-rank">06</span>
+            <div>
+              <h3>NCPBA All Island Open Badminton Championships 2023</h3>
+              <p>U19 Boys Singles Quarterfinalist.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card animate-on-scroll">
+            <span class="achievement-rank">07</span>
+            <div>
+              <h3>NWPBA All Island Open Badminton Championship 2023</h3>
+              <p>U19 Boys Singles Quarterfinalist.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card animate-on-scroll">
+            <span class="achievement-rank">08</span>
+            <div>
+              <h3>SPBA All Island Open Badminton Championship 2023</h3>
+              <p>U19 Boys Singles Quarterfinalist.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card animate-on-scroll">
+            <span class="achievement-rank">09</span>
+            <div>
+              <h3>National Junior Pool 2020</h3>
+              <p>Selected to the National Junior Badminton Pool.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card animate-on-scroll">
+            <span class="achievement-rank">10</span>
+            <div>
+              <h3>Open Men's Singles National Ranking</h3>
+              <p>Current national ranking: No. 21.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="sport-tagline animate-on-scroll">
+        Building software with the same discipline I bring to the court: consistent practice,
+        clear decisions, fast learning, and calm performance under pressure.
+      </p>
+    </div>
+  </section>
+
   <!-- CERTIFICATIONS -->
   <section id="certifications" class="section section-alt">
     <div class="container">
@@ -404,21 +983,33 @@
       <div class="cert-grid">
         <div class="cert-card cert-blue animate-on-scroll">
           <div class="cert-icon"><i class="fas fa-certificate"></i></div>
-          <h3>Add Your Certification</h3>
-          <p class="cert-org">Issuing Organization</p>
-          <p class="cert-date"><i class="far fa-calendar-alt"></i> Month Year</p>
+          <h3>Java Programming for Beginners</h3>
+          <p class="cert-org">Organization - IBM</p>
+          <p class="cert-date"><i class="far fa-calendar-alt"></i> June 2026</p>
+          <a href="https://www.coursera.org/account/accomplishments/verify/UN97M5X8FF1R" class="contact-item" target="_blank" rel="noopener noreferrer">
+              <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+              <span>Show Credential</span>
+            </a>
         </div>
         <div class="cert-card cert-teal animate-on-scroll">
           <div class="cert-icon"><i class="fas fa-certificate"></i></div>
-          <h3>Add Your Certification</h3>
-          <p class="cert-org">Issuing Organization</p>
-          <p class="cert-date"><i class="far fa-calendar-alt"></i> Month Year</p>
+          <h3>AI Fundamentals</h3>
+          <p class="cert-org">Organization - Google</p>
+          <p class="cert-date"><i class="far fa-calendar-alt"></i>July 2026</p>
+           <a href="https://www.coursera.org/account/accomplishments/verify/30O7IBV73Y63" class="contact-item" target="_blank" rel="noopener noreferrer">
+              <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+              <span>Show Credential</span>
+            </a>
         </div>
         <div class="cert-card cert-purple animate-on-scroll">
           <div class="cert-icon"><i class="fas fa-certificate"></i></div>
-          <h3>Add Your Certification</h3>
-          <p class="cert-org">Issuing Organization</p>
-          <p class="cert-date"><i class="far fa-calendar-alt"></i> Month Year</p>
+          <h3>AI for Brainstorming and Planning</h3>
+          <p class="cert-org">Organization - Google</p>
+          <p class="cert-date"><i class="far fa-calendar-alt"></i> July 2026</p>
+          <a href="https://www.coursera.org/account/accomplishments/verify/S3H8WEQLFPZG" class="contact-item" target="_blank" rel="noopener noreferrer">
+              <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+              <span>Show Credential</span>
+            </a>
         </div>
       </div>
     </div>
@@ -429,38 +1020,49 @@
     <div class="container">
       <div class="section-heading animate-on-scroll">
         <h2>Resume</h2>
-        <p>Download my latest resume.</p>
+        <p>View or download my professional CV with education, projects, skills, and sports achievements.</p>
       </div>
-      <div class="resume-wrapper animate-on-scroll">
-        <div class="resume-preview">
-          <div class="resume-mock">
-            <div class="rm-header">
-              <div class="rm-name">Ushan Prabashwara</div>
-              <div class="rm-contact">ushanprabashwara@gmail.com · Kaduwela, Sri Lanka</div>
+      <div class="resume-showcase animate-on-scroll">
+        <a href="Ushan_Prabashwara_Professional_CV.pdf" class="resume-preview-link" target="_blank" rel="noopener noreferrer" aria-label="View professional CV">
+          <img src="resume-preview.png" alt="Preview of Ushan Prabashwara's professional CV" class="resume-preview-img" />
+          <div class="resume-preview-overlay">
+            <span><i class="fas fa-eye"></i> View CV</span>
+          </div>
+        </a>
+
+        <div class="resume-panel">
+          <h3>Professional CV</h3>
+          <p>
+            A polished two-page CV covering my IT education, software projects, technical skills,
+            leadership experience, and national-level badminton achievements.
+          </p>
+
+          <div class="resume-highlights">
+            <div class="resume-highlight">
+              <strong>3.52</strong>
+              <span>Current GPA</span>
             </div>
-            <div class="rm-section">
-              <div class="rm-title">Education</div>
-              <div class="rm-line"></div>
-              <div class="rm-item">B.Sc. Information Technology · SLIIT UNI · 2026 - Present</div>
+            <div class="resume-highlight">
+              <strong>4+</strong>
+              <span>Projects</span>
             </div>
-            <div class="rm-section">
-              <div class="rm-title">Skills</div>
-              <div class="rm-line"></div>
-              <div class="rm-item">Java · Python · JavaScript · Spring Boot · MySQL</div>
-            </div>
-            <div class="rm-section">
-              <div class="rm-title">Projects</div>
-              <div class="rm-line"></div>
-              <div class="rm-item">Car Service Maintenance and Tracking System</div>
-              <div class="rm-item">Personal Portfolio Website</div>
-              <div class="rm-item">StudyTrack System</div>
-              <div class="rm-item">SmartExpense Tracker</div>
+            <div class="resume-highlight">
+              <strong>No. 21</strong>
+              <span>National ranking</span>
             </div>
           </div>
+
+          <div class="resume-actions">
+            <a href="Ushan_Prabashwara_Professional_CV.pdf" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-eye"></i> View CV
+            </a>
+            <a href="Ushan_Prabashwara_Professional_CV.pdf" class="btn btn-primary" download>
+              <i class="fas fa-download"></i> Download CV
+            </a>
+          </div>
+
+          <p class="resume-updated"><i class="fas fa-calendar-check"></i> Updated August 2026</p>
         </div>
-        <a href="Ushan (CV) 1.pdf" class="btn btn-primary btn-large" download>
-          <i class="fas fa-download"></i> Download Resume
-        </a>
       </div>
     </div>
   </section>
@@ -476,7 +1078,7 @@
 
         <div class="contact-info animate-on-scroll">
           <h3>Get In Touch</h3>
-          <p>I'm currently not looking for internship opportunities. Whether you have a question or just want to say hello, my inbox is always open!</p>
+          <p>Open to collaborations, academic projects, and meaningful software development conversations. Whether you have a question or just want to say hello, my inbox is always open!</p>
           <div class="contact-details">
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ushanprabashwara@gmail.com" class="contact-item" target="_blank" rel="noopener noreferrer">
               <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
@@ -486,13 +1088,13 @@
               <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
               <span>Colombo, Kaduwela, Sri Lanka</span>
             </div>
-            <a href="https://github.com/" target="_blank" class="contact-item">
+            <a href="https://github.com/ushanprabashwara" target="_blank" class="contact-item">
               <div class="contact-item-icon"><i class="fab fa-github"></i></div>
-              <span>github.com/ushan</span>
+              <span>GitHub - ushanprabashwara</span>
             </a>
             <a href="https://www.linkedin.com/in/ushan-prabashwara-a091842aa" target="_blank" class="contact-item">
               <div class="contact-item-icon"><i class="fab fa-linkedin"></i></div>
-              <span>linkedin.com/in/ushan-prabashwara-a091842aa</span>
+              <span>Ushan Prabashwara</span>
             </a>
             <a href="https://www.instagram.com/ushan__prabashwara?igsh=NGhkZmJkbXdvaWtm" target="_blank" class="contact-item">
               <div class="contact-item-icon"><i class="fab fa-instagram"></i></div>
@@ -500,7 +1102,7 @@
             </a>
             <a href="https://www.facebook.com/share/18wgyZsRzz/" target="_blank" class="contact-item">
               <div class="contact-item-icon"><i class="fab fa-facebook"></i></div>
-              <span>facebook.com/ushan</span>
+              <span>Ushan Prabashwara</span>
             </a>
           </div>
         </div>
@@ -519,7 +1121,7 @@
           <div class="footer-logo">UP.</div>
           <p class="footer-bio">Information Technology Undergraduate &amp; Aspiring Software Developer based in Colombo, Kaduwela, Sri Lanka.</p>
           <div class="footer-socials">
-            <a href="https://github.com/" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/ushanprabashwara" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/ushan-prabashwara-a091842aa" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ushanprabashwara@gmail.com" aria-label="Email" target="_blank" rel="noopener noreferrer"><i class="fas fa-envelope"></i></a>
           </div>
@@ -539,6 +1141,7 @@
           <ul class="footer-links">
             <li><a href="#experience">Experience</a></li>
             <li><a href="#education">Education</a></li>
+            <li><a href="#sports">Sports</a></li>
             <li><a href="#certifications">Certifications</a></li>
             <li><a href="#resume">Resume</a></li>
           </ul>
