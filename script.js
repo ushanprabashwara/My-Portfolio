@@ -122,6 +122,27 @@ if (counters.length) {
   counters.forEach(counter => counterObserver.observe(counter));
 }
 
+/* ===== INTERACTIVE CARD TILT ===== */
+const motionSafe = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const tiltCards = document.querySelectorAll('.resume-preview-link, .cert-card');
+
+if (motionSafe && window.matchMedia('(pointer: fine)').matches) {
+  tiltCards.forEach(card => {
+    card.addEventListener('pointermove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+      card.style.setProperty('--tilt-x', `${x * 4}deg`);
+      card.style.setProperty('--tilt-y', `${y * -4}deg`);
+    });
+
+    card.addEventListener('pointerleave', () => {
+      card.style.removeProperty('--tilt-x');
+      card.style.removeProperty('--tilt-y');
+    });
+  });
+}
+
 /* ===== CONTACT FORM VALIDATION ===== */
 const contactForm = document.getElementById('contactForm');
 const formSuccess = document.getElementById('formSuccess');

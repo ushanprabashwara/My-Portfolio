@@ -314,13 +314,40 @@
       background: var(--card-bg);
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
+      transform-style: preserve-3d;
+      isolation: isolate;
       transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     }
 
+    .resume-preview-link::before {
+      content: '';
+      position: absolute;
+      inset: -35%;
+      z-index: 1;
+      background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.26), transparent 65%);
+      transform: translateX(-65%) rotate(8deg);
+      transition: transform 0.75s ease;
+      pointer-events: none;
+    }
+
+    .resume-preview-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+      pointer-events: none;
+    }
+
     .resume-preview-link:hover {
-      transform: translateY(-6px);
+      transform: translateY(-8px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
       box-shadow: var(--shadow-hover);
       border-color: rgba(37, 99, 235, 0.35);
+    }
+
+    .resume-preview-link:hover::before {
+      transform: translateX(65%) rotate(8deg);
     }
 
     .resume-preview-img {
@@ -342,6 +369,7 @@
       font-weight: 700;
       opacity: 0;
       transition: opacity 0.25s;
+      z-index: 3;
     }
 
     .resume-preview-link:hover .resume-preview-overlay {
@@ -360,12 +388,27 @@
 
     .resume-panel {
       text-align: left;
+      position: relative;
     }
 
     .resume-panel h3 {
       font-size: 1.5rem;
       margin-bottom: 12px;
       color: var(--text);
+    }
+
+    .resume-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      color: var(--accent);
+      background: rgba(20, 184, 166, 0.1);
+      border: 1px solid rgba(20, 184, 166, 0.22);
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 14px;
     }
 
     .resume-panel > p {
@@ -388,6 +431,32 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .resume-highlight::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.65s ease;
+    }
+
+    .resume-highlight:hover {
+      transform: translateY(-4px);
+      border-color: rgba(37, 99, 235, 0.32);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .resume-showcase.in-view .resume-highlight::after {
+      transform: scaleX(1);
     }
 
     .resume-highlight strong {
@@ -410,6 +479,33 @@
       flex-wrap: wrap;
       gap: 12px;
       margin-bottom: 12px;
+    }
+
+    .resume-action-note {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 22px;
+    }
+
+    .resume-action-note span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    .resume-action-note i {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      background: rgba(37, 99, 235, 0.09);
+      border: 1px solid rgba(37, 99, 235, 0.18);
     }
 
     .resume-updated {
@@ -442,6 +538,207 @@
     @media (max-width: 520px) {
       .resume-highlights {
         grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== ADVANCED CERTIFICATIONS ===== */
+    .cert-card {
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+      isolation: isolate;
+      transform-style: preserve-3d;
+    }
+
+    .cert-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.14), transparent 42%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .cert-card:hover::before {
+      opacity: 1;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-8px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
+    }
+
+    .cert-card:hover .cert-icon {
+      transform: translateY(-3px) rotate(-4deg) scale(1.04);
+    }
+
+    .cert-featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+      gap: 28px;
+      align-items: center;
+      padding: 34px;
+      border-top-width: 0;
+      border: 1px solid rgba(20, 184, 166, 0.38);
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(20, 184, 166, 0.14)),
+        var(--card-bg);
+    }
+
+    .cert-featured::before {
+      opacity: 1;
+      background:
+        radial-gradient(circle at 92% 8%, rgba(20, 184, 166, 0.24), transparent 34%),
+        radial-gradient(circle at 8% 88%, rgba(37, 99, 235, 0.18), transparent 36%);
+    }
+
+    .cert-featured h3 {
+      min-height: auto;
+      font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+      margin-bottom: 10px;
+    }
+
+    .cert-featured .cert-icon {
+      width: 66px;
+      height: 66px;
+      font-size: 1.65rem;
+      box-shadow: 0 10px 28px rgba(37, 99, 235, 0.2);
+    }
+
+    .cert-featured .cert-level {
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-color: transparent;
+    }
+
+    .cert-featured .cert-progress {
+      margin: 0;
+    }
+
+    .cert-featured .cert-link {
+      margin-top: 16px;
+    }
+
+    .cert-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .cert-icon {
+      margin: 0;
+      transition: transform 0.3s;
+    }
+
+    .cert-level {
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      white-space: nowrap;
+    }
+
+    .cert-card h3 {
+      min-height: 2.6em;
+      margin-bottom: 10px;
+    }
+
+    .cert-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0 18px;
+    }
+
+    .cert-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--bg-alt);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .cert-progress {
+      margin: 16px 0 18px;
+    }
+
+    .cert-progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .cert-progress-track {
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.18);
+      overflow: hidden;
+    }
+
+    .cert-progress-fill {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 1.1s ease;
+    }
+
+    .cert-card.in-view .cert-progress-fill {
+      width: var(--cert-progress, 100%);
+    }
+
+    .cert-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 10px;
+      color: var(--primary);
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      font-size: 0.86rem;
+      font-weight: 700;
+      transition: transform 0.2s, background 0.2s, color 0.2s;
+    }
+
+    .cert-link:hover {
+      transform: translateY(-2px);
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .cert-grid .cert-card:nth-child(1) { transition-delay: 0.04s; }
+    .cert-grid .cert-card:nth-child(2) { transition-delay: 0.10s; }
+    .cert-grid .cert-card:nth-child(3) { transition-delay: 0.16s; }
+    .cert-grid .cert-card:nth-child(4) { transition-delay: 0.22s; }
+    .cert-grid .cert-card:nth-child(5) { transition-delay: 0.28s; }
+    .cert-grid .cert-card:nth-child(6) { transition-delay: 0.34s; }
+    .cert-grid .cert-card:nth-child(7) { transition-delay: 0.40s; }
+    .cert-grid .cert-card:nth-child(8) { transition-delay: 0.46s; }
+    .cert-grid .cert-card:nth-child(9) { transition-delay: 0.52s; }
+
+    @media (max-width: 760px) {
+      .cert-featured {
+        grid-template-columns: 1fr;
+        padding: 28px 24px;
       }
     }
   </style>
@@ -503,7 +800,7 @@
           </div>
           <div class="hero-highlight">
             <i class="fas fa-trophy"></i>
-            <strong><span class="stat-prefix">No.</span><span class="count-up" data-count="21">0</span></strong>
+            <strong><span class="stat-prefix">No.</span><span class="count-up" data-count="29">0</span></strong>
             <span class="stat-label">National ranking</span>
           </div>
         </div>
@@ -561,7 +858,7 @@
             </div>
             <div class="info-item">
               <i class="fas fa-futbol"></i>
-              <span>Badminton Player (Open Men's Singles Current National Ranking 21)</span>
+              <span>Badminton Player (Open Men's Singles Current National Ranking 29)</span>
             </div>
             <div class="info-item">
               <i class="fas fa-envelope"></i>
@@ -774,7 +1071,7 @@
             </div>
             <h3>National Badminton Player</h3>
             <p class="timeline-org">Selected to National Junior Badminton Pool in 2015 </p>
-              <p> Current National Ranking - Open Men's Singles No.21 </p>
+              <p> Current National Ranking - Open Men's Singles No.29 & Doubles No.25 </p>
             <p>2023 School Badminton Captain. Won the 1st Place on National School Games 2023. National Sport Colorsman.</p>
           </div>
         </div>
@@ -852,7 +1149,7 @@
     <div class="container">
       <div class="section-heading animate-on-scroll">
         <h2>Sports Achievements</h2>
-        <p>Top 10 badminton milestones from my competitive journey.</p>
+        <p>Top badminton milestones from my competitive journey.</p>
       </div>
 
       <div class="sports-overview">
@@ -865,7 +1162,7 @@
           </p>
           <div class="sports-stats">
             <div class="sports-stat">
-              <strong>10</strong>
+              <strong>11</strong>
               <span>Top achievements</span>
             </div>
             <div class="sports-stat">
@@ -877,7 +1174,7 @@
               <span>School champions</span>
             </div>
             <div class="sports-stat">
-              <strong>No.21</strong>
+              <strong>No.29</strong>
               <span>Open men's singles ranking</span>
             </div>
           </div>
@@ -919,8 +1216,8 @@
           <div class="achievement-card animate-on-scroll">
             <span class="achievement-rank">05</span>
             <div>
-              <h3>NCPBA All Island Open Badminton Championships 2023</h3>
-              <p>Open Men's Singles Quarterfinalist.</p>
+              <h3>NCPBA All Island Open Badminton Championships 2026</h3>
+              <p>Open Men's Doubles Semifinalist.</p>
             </div>
           </div>
 
@@ -928,14 +1225,14 @@
             <span class="achievement-rank">06</span>
             <div>
               <h3>NCPBA All Island Open Badminton Championships 2023</h3>
-              <p>U19 Boys Singles Quarterfinalist.</p>
+              <p>Open Men's Singles Quarterfinalist.</p>
             </div>
           </div>
 
           <div class="achievement-card animate-on-scroll">
             <span class="achievement-rank">07</span>
             <div>
-              <h3>NWPBA All Island Open Badminton Championship 2023</h3>
+              <h3>NCPBA All Island Open Badminton Championships 2023</h3>
               <p>U19 Boys Singles Quarterfinalist.</p>
             </div>
           </div>
@@ -943,7 +1240,7 @@
           <div class="achievement-card animate-on-scroll">
             <span class="achievement-rank">08</span>
             <div>
-              <h3>SPBA All Island Open Badminton Championship 2023</h3>
+              <h3>NWPBA All Island Open Badminton Championship 2023</h3>
               <p>U19 Boys Singles Quarterfinalist.</p>
             </div>
           </div>
@@ -951,16 +1248,24 @@
           <div class="achievement-card animate-on-scroll">
             <span class="achievement-rank">09</span>
             <div>
-              <h3>National Junior Pool 2020</h3>
-              <p>Selected to the National Junior Badminton Pool.</p>
+              <h3>SPBA All Island Open Badminton Championship 2023</h3>
+              <p>U19 Boys Singles Quarterfinalist.</p>
             </div>
           </div>
 
           <div class="achievement-card animate-on-scroll">
             <span class="achievement-rank">10</span>
             <div>
-              <h3>Open Men's Singles National Ranking</h3>
-              <p>Current national ranking: No. 21.</p>
+              <h3>National Junior Pool 2020</h3>
+              <p>Selected to the National Junior Badminton Pool.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card animate-on-scroll">
+            <span class="achievement-rank">11</span>
+            <div>
+              <h3>Open Men's Doubles National Ranking</h3>
+              <p>Current national ranking: No.28</p>
             </div>
           </div>
         </div>
@@ -981,35 +1286,209 @@
         <p>Credentials and achievements.</p>
       </div>
       <div class="cert-grid">
-        <div class="cert-card cert-blue animate-on-scroll">
-          <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+        <div class="cert-card cert-blue animate-on-scroll" style="--cert-progress: 92%;">
+          <div class="cert-topline">
+            <div class="cert-icon"><i class="fas fa-code"></i></div>
+            <span class="cert-level">Programming</span>
+          </div>
           <h3>Java Programming for Beginners</h3>
           <p class="cert-org">Organization - IBM</p>
-          <p class="cert-date"><i class="far fa-calendar-alt"></i> June 2026</p>
-          <a href="https://www.coursera.org/account/accomplishments/verify/UN97M5X8FF1R" class="contact-item" target="_blank" rel="noopener noreferrer">
-              <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
-              <span>Show Credential</span>
-            </a>
+          <div class="cert-meta">
+            <span class="cert-pill"><i class="far fa-calendar-alt"></i> June 2026</span>
+            <span class="cert-pill"><i class="fas fa-layer-group"></i> Java</span>
+          </div>
+          <div class="cert-progress">
+            <div class="cert-progress-label">
+              <span>Credential strength</span>
+              <span>92%</span>
+            </div>
+            <div class="cert-progress-track"><span class="cert-progress-fill"></span></div>
+          </div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/UN97M5X8FF1R" class="cert-link" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-arrow-up-right-from-square"></i> Show Credential
+          </a>
         </div>
-        <div class="cert-card cert-teal animate-on-scroll">
-          <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+        <div class="cert-card cert-teal animate-on-scroll" style="--cert-progress: 88%;">
+          <div class="cert-topline">
+            <div class="cert-icon"><i class="fas fa-brain"></i></div>
+            <span class="cert-level">AI</span>
+          </div>
           <h3>AI Fundamentals</h3>
           <p class="cert-org">Organization - Google</p>
-          <p class="cert-date"><i class="far fa-calendar-alt"></i>July 2026</p>
-           <a href="https://www.coursera.org/account/accomplishments/verify/30O7IBV73Y63" class="contact-item" target="_blank" rel="noopener noreferrer">
-              <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
-              <span>Show Credential</span>
-            </a>
+          <div class="cert-meta">
+            <span class="cert-pill"><i class="far fa-calendar-alt"></i> July 2026</span>
+            <span class="cert-pill"><i class="fas fa-microchip"></i> AI Basics</span>
+          </div>
+          <div class="cert-progress">
+            <div class="cert-progress-label">
+              <span>Credential strength</span>
+              <span>88%</span>
+            </div>
+            <div class="cert-progress-track"><span class="cert-progress-fill"></span></div>
+          </div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/30O7IBV73Y63" class="cert-link" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-arrow-up-right-from-square"></i> Show Credential
+          </a>
         </div>
-        <div class="cert-card cert-purple animate-on-scroll">
-          <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+        <div class="cert-card cert-purple animate-on-scroll" style="--cert-progress: 84%;">
+          <div class="cert-topline">
+            <div class="cert-icon"><i class="fas fa-lightbulb"></i></div>
+            <span class="cert-level">Planning</span>
+          </div>
           <h3>AI for Brainstorming and Planning</h3>
           <p class="cert-org">Organization - Google</p>
-          <p class="cert-date"><i class="far fa-calendar-alt"></i> July 2026</p>
-          <a href="https://www.coursera.org/account/accomplishments/verify/S3H8WEQLFPZG" class="contact-item" target="_blank" rel="noopener noreferrer">
-              <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
-              <span>Show Credential</span>
+          <div class="cert-meta">
+            <span class="cert-pill"><i class="far fa-calendar-alt"></i> July 2026</span>
+            <span class="cert-pill"><i class="fas fa-diagram-project"></i> Ideation</span>
+          </div>
+          <div class="cert-progress">
+            <div class="cert-progress-label">
+              <span>Credential strength</span>
+              <span>84%</span>
+            </div>
+            <div class="cert-progress-track"><span class="cert-progress-fill"></span></div>
+          </div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/S3H8WEQLFPZG" class="cert-link" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-arrow-up-right-from-square"></i> Show Credential
+          </a>
+        </div>
+        <div class="cert-card cert-blue animate-on-scroll" style="--cert-progress: 90%;">
+          <div class="cert-topline">
+            <div class="cert-icon"><i class="fas fa-mobile-screen-button"></i></div>
+            <span class="cert-level">App Building</span>
+          </div>
+          <h3>AI for App Building</h3>
+          <p class="cert-org">Organization - Google</p>
+          <div class="cert-meta">
+            <span class="cert-pill"><i class="far fa-calendar-alt"></i> August 2026</span>
+            <span class="cert-pill"><i class="fas fa-cubes"></i> App Prototyping</span>
+          </div>
+          <div class="cert-progress">
+            <div class="cert-progress-label">
+              <span>Credential strength</span>
+              <span>90%</span>
+            </div>
+            <div class="cert-progress-track"><span class="cert-progress-fill"></span></div>
+          </div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/3GDLCA29CDOJ" class="cert-link" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-arrow-up-right-from-square"></i> Show Credential
+          </a>
+        </div>
+        <div class="cert-card cert-teal animate-on-scroll" style="--cert-progress: 86%;">
+          <div class="cert-topline">
+            <div class="cert-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+            <span class="cert-level">Content</span>
+          </div>
+          <h3>AI for Content Creation</h3>
+          <p class="cert-org">Organization - Google</p>
+          <div class="cert-meta">
+            <span class="cert-pill"><i class="far fa-calendar-alt"></i> August 2026</span>
+            <span class="cert-pill"><i class="fas fa-photo-film"></i> Creative AI</span>
+          </div>
+          <div class="cert-progress">
+            <div class="cert-progress-label">
+              <span>Credential strength</span>
+              <span>86%</span>
+            </div>
+            <div class="cert-progress-track"><span class="cert-progress-fill"></span></div>
+          </div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/CCZ2GU82GBZW" class="cert-link" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-arrow-up-right-from-square"></i> Show Credential
+          </a>
+        </div>
+        <div class="cert-card cert-purple animate-on-scroll" style="--cert-progress: 91%;">
+          <div class="cert-topline">
+            <div class="cert-icon"><i class="fas fa-chart-line"></i></div>
+            <span class="cert-level">Data</span>
+          </div>
+          <h3>AI for Data Analysis</h3>
+          <p class="cert-org">Organization - Google</p>
+          <div class="cert-meta">
+            <span class="cert-pill"><i class="far fa-calendar-alt"></i> August 2026</span>
+            <span class="cert-pill"><i class="fas fa-database"></i> Analytics</span>
+          </div>
+          <div class="cert-progress">
+            <div class="cert-progress-label">
+              <span>Credential strength</span>
+              <span>91%</span>
+            </div>
+            <div class="cert-progress-track"><span class="cert-progress-fill"></span></div>
+          </div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/CVNYN9B36V54" class="cert-link" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-arrow-up-right-from-square"></i> Show Credential
+          </a>
+        </div>
+        <div class="cert-card cert-blue animate-on-scroll" style="--cert-progress: 89%;">
+          <div class="cert-topline">
+            <div class="cert-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+            <span class="cert-level">Research</span>
+          </div>
+          <h3>AI for Research and Insights</h3>
+          <p class="cert-org">Organization - Google</p>
+          <div class="cert-meta">
+            <span class="cert-pill"><i class="far fa-calendar-alt"></i> August 2026</span>
+            <span class="cert-pill"><i class="fas fa-lightbulb"></i> Insights</span>
+          </div>
+          <div class="cert-progress">
+            <div class="cert-progress-label">
+              <span>Credential strength</span>
+              <span>89%</span>
+            </div>
+            <div class="cert-progress-track"><span class="cert-progress-fill"></span></div>
+          </div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/0ZSD0UHVUZFK" class="cert-link" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-arrow-up-right-from-square"></i> Show Credential
+          </a>
+        </div>
+        <div class="cert-card cert-teal animate-on-scroll" style="--cert-progress: 87%;">
+          <div class="cert-topline">
+            <div class="cert-icon"><i class="fas fa-pen-nib"></i></div>
+            <span class="cert-level">Communication</span>
+          </div>
+          <h3>AI for Writing and Communicating</h3>
+          <p class="cert-org">Organization - Google</p>
+          <div class="cert-meta">
+            <span class="cert-pill"><i class="far fa-calendar-alt"></i> August 2026</span>
+            <span class="cert-pill"><i class="fas fa-comments"></i> Writing</span>
+          </div>
+          <div class="cert-progress">
+            <div class="cert-progress-label">
+              <span>Credential strength</span>
+              <span>87%</span>
+            </div>
+            <div class="cert-progress-track"><span class="cert-progress-fill"></span></div>
+          </div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/4MI0XX3S3E9S" class="cert-link" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-arrow-up-right-from-square"></i> Show Credential
+          </a>
+        </div>
+        <div class="cert-card cert-featured cert-teal animate-on-scroll" style="--cert-progress: 100%;">
+          <div>
+            <div class="cert-topline">
+              <div class="cert-icon"><i class="fas fa-award"></i></div>
+              <span class="cert-level">Main Certificate</span>
+            </div>
+            <h3>Google AI Professional Certificate</h3>
+            <p class="cert-org">Organization - Google</p>
+            <div class="cert-meta">
+              <span class="cert-pill"><i class="far fa-calendar-alt"></i> August 2026</span>
+              <span class="cert-pill"><i class="fas fa-robot"></i> Professional AI</span>
+              <span class="cert-pill"><i class="fas fa-star"></i> Specialization</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="cert-progress">
+              <div class="cert-progress-label">
+                <span>Credential strength</span>
+                <span>100%</span>
+              </div>
+              <div class="cert-progress-track"><span class="cert-progress-fill"></span></div>
+            </div>
+            <a href="https://www.coursera.org/account/accomplishments/specialization/SH1BZVZ93Q9I" class="cert-link" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-arrow-up-right-from-square"></i> Show Main Credential
             </a>
+          </div>
         </div>
       </div>
     </div>
@@ -1031,6 +1510,7 @@
         </a>
 
         <div class="resume-panel">
+          <span class="resume-kicker"><i class="fas fa-bolt"></i> Interactive resume preview</span>
           <h3>Professional CV</h3>
           <p>
             A polished two-page CV covering my IT education, software projects, technical skills,
@@ -1047,9 +1527,14 @@
               <span>Projects</span>
             </div>
             <div class="resume-highlight">
-              <strong>No. 21</strong>
+              <strong>No.29</strong>
               <span>National ranking</span>
             </div>
+          </div>
+
+          <div class="resume-action-note">
+            <span><i class="fas fa-mouse-pointer"></i> Hover the preview to inspect the CV with a depth effect.</span>
+            <span><i class="fas fa-file-pdf"></i> Open it in a new tab or download a ready-to-share PDF.</span>
           </div>
 
           <div class="resume-actions">
@@ -1061,7 +1546,7 @@
             </a>
           </div>
 
-          <p class="resume-updated"><i class="fas fa-calendar-check"></i> Updated August 2026</p>
+          <p class="resume-updated"><i class="fas fa-calendar-check"></i> Updated October 2026</p>
         </div>
       </div>
     </div>
