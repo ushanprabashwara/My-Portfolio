@@ -296,6 +296,481 @@
       }
     }
 
+    /* ===== ENHANCED SKILLS / PROJECTS / EDUCATION ===== */
+    .skills-grid {
+      align-items: stretch;
+    }
+
+    .skill-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 100%;
+      isolation: isolate;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 92% 8%, rgba(37, 99, 235, 0.16), transparent 34%),
+        linear-gradient(135deg, rgba(20, 184, 166, 0.08), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(37, 99, 235, 0.34);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .skill-card:hover::before {
+      opacity: 1;
+    }
+
+    .skill-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .skill-head h3 {
+      margin-bottom: 0;
+    }
+
+    .skill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--primary);
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.16);
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .skill-summary {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+      margin: 0 0 18px;
+    }
+
+    .skill-meter {
+      margin-top: 18px;
+    }
+
+    .skill-meter-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .skill-meter-track {
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.18);
+      overflow: hidden;
+    }
+
+    .skill-meter-fill {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 1s ease;
+    }
+
+    .skill-card.in-view .skill-meter-fill {
+      width: var(--skill-level, 80%);
+    }
+
+    .skill-icon {
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.05rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .skill-item:hover .skill-icon {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.22);
+    }
+
+    .skill-icon.java { background: linear-gradient(135deg, #f97316, #dc2626); }
+    .skill-icon.python { background: linear-gradient(135deg, #3776ab, #ffd43b); }
+    .skill-icon.js { background: linear-gradient(135deg, #f7df1e, #f59e0b); color: #111827; }
+    .skill-icon.html { background: linear-gradient(135deg, #e34f26, #f97316); }
+    .skill-icon.css { background: linear-gradient(135deg, #1572b6, #38bdf8); }
+    .skill-icon.tailwind { background: linear-gradient(135deg, #06b6d4, #0f766e); }
+    .skill-icon.bootstrap { background: linear-gradient(135deg, #7952b3, #a855f7); }
+    .skill-icon.spring { background: linear-gradient(135deg, #6db33f, #16a34a); }
+    .skill-icon.mysql { background: linear-gradient(135deg, #00758f, #f29111); }
+    .skill-icon.git { background: linear-gradient(135deg, #f05032, #dc2626); }
+    .skill-icon.github-sk { background: linear-gradient(135deg, #111827, #374151); }
+    .skill-icon.vscode { background: linear-gradient(135deg, #007acc, #2563eb); }
+    .skill-icon.intelij { background: linear-gradient(135deg, #ef4444, #7c3aed 52%, #0ea5e9); }
+    .skill-icon.replit { background: linear-gradient(135deg, #f26207, #fb923c); }
+
+    .experience-overview {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 0 0 38px;
+    }
+
+    .experience-stat {
+      padding: 18px 16px;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(20, 184, 166, 0.06)),
+        var(--card-bg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .experience-stat:hover {
+      transform: translateY(-5px);
+      border-color: rgba(37, 99, 235, 0.32);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .experience-stat i {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      margin-bottom: 12px;
+    }
+
+    .experience-stat strong {
+      display: block;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .experience-stat span {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .timeline-dot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 7px rgba(37, 99, 235, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .timeline-dot i {
+      color: #fff;
+      font-size: 0.78rem;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      transform: scale(1.12);
+      box-shadow: 0 0 0 10px rgba(20, 184, 166, 0.13), 0 10px 24px rgba(37, 99, 235, 0.22);
+    }
+
+    .timeline-card {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .timeline-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 94% 12%, rgba(37, 99, 235, 0.14), transparent 34%),
+        linear-gradient(135deg, rgba(20, 184, 166, 0.08), transparent 52%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(37, 99, 235, 0.32);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .timeline-card:hover::before {
+      opacity: 1;
+    }
+
+    .timeline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .timeline-focus {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .timeline-focus span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--text-muted);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .timeline-focus i {
+      color: var(--primary);
+    }
+
+    @media (max-width: 760px) {
+      .experience-overview {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .experience-overview {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at top right, rgba(20, 184, 166, 0.14), transparent 38%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(37, 99, 235, 0.35);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-img {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, 0.28), transparent 62%);
+      transform: translateX(-115%);
+      transition: transform 0.75s ease;
+    }
+
+    .project-card:hover .project-img::after {
+      transform: translateX(115%);
+    }
+
+    .project-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .project-status,
+    .project-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      border: 1px solid rgba(37, 99, 235, 0.18);
+    }
+
+    .project-status {
+      color: var(--primary);
+      background: rgba(37, 99, 235, 0.08);
+    }
+
+    .project-type {
+      color: var(--accent);
+      background: rgba(20, 184, 166, 0.1);
+      border-color: rgba(20, 184, 166, 0.2);
+    }
+
+    .project-impact {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .project-impact span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 11px;
+      border-radius: 10px;
+      color: var(--text-muted);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .project-impact i {
+      color: var(--primary);
+    }
+
+    .project-links {
+      margin-top: auto;
+    }
+
+    .edu-card {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 94% 10%, rgba(37, 99, 235, 0.14), transparent 34%),
+        radial-gradient(circle at 8% 88%, rgba(20, 184, 166, 0.12), transparent 36%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .edu-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(37, 99, 235, 0.32);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .edu-card:hover::before,
+    .edu-card.featured-edu::before {
+      opacity: 1;
+    }
+
+    .edu-card.featured-edu {
+      border-color: rgba(20, 184, 166, 0.28);
+    }
+
+    .edu-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+
+    .edu-title-row h3 {
+      margin-bottom: 0;
+    }
+
+    .edu-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .edu-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 20px;
+    }
+
+    .edu-stat {
+      padding: 14px 12px;
+      border-radius: 10px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+    }
+
+    .edu-stat strong {
+      display: block;
+      color: var(--primary);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .edu-stat span {
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 680px) {
+      .skill-head,
+      .edu-title-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .project-impact,
+      .edu-meta-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ===== ENHANCED RESUME ===== */
     .resume-showcase {
       display: grid;
@@ -883,47 +1358,87 @@
       </div>
       <div class="skills-grid">
 
-        <div class="skill-card animate-on-scroll">
-          <h3>Programming Languages</h3>
+        <div class="skill-card animate-on-scroll" style="--skill-level: 86%;">
+          <div class="skill-head">
+            <h3>Programming Languages</h3>
+            <span class="skill-badge"><i class="fas fa-code"></i> Core stack</span>
+          </div>
+          <p class="skill-summary">Comfortable building structured academic and personal projects with clear logic, reusable code, and clean problem solving.</p>
           <div class="skill-items">
-            <div class="skill-item"><span class="skill-icon java">☕</span><span>Java</span></div>
-            <div class="skill-item"><span class="skill-icon python">🐍</span><span>Python</span></div>
-            <div class="skill-item"><span class="skill-icon js">JS</span><span>JavaScript</span></div>
+            <div class="skill-item"><span class="skill-icon java"><i class="fab fa-java"></i></span><span>Java</span></div>
+            <div class="skill-item"><span class="skill-icon python"><i class="fab fa-python"></i></span><span>Python</span></div>
+            <div class="skill-item"><span class="skill-icon js"><i class="fab fa-js"></i></span><span>JavaScript</span></div>
+          </div>
+          <div class="skill-meter">
+            <div class="skill-meter-label"><span>Practical strength</span><span>86%</span></div>
+            <div class="skill-meter-track"><span class="skill-meter-fill"></span></div>
           </div>
         </div>
 
-        <div class="skill-card animate-on-scroll">
-          <h3>Frontend</h3>
+        <div class="skill-card animate-on-scroll" style="--skill-level: 90%;">
+          <div class="skill-head">
+            <h3>Frontend</h3>
+            <span class="skill-badge"><i class="fas fa-display"></i> UI focused</span>
+          </div>
+          <p class="skill-summary">Able to create responsive interfaces with modern layouts, polished sections, and smooth user interactions.</p>
           <div class="skill-items">
-            <div class="skill-item"><span class="skill-icon html">H</span><span>HTML</span></div>
-            <div class="skill-item"><span class="skill-icon css">CSS</span><span>CSS</span></div>
-            <div class="skill-item"><span class="skill-icon tailwind">TW</span><span>Tailwind</span></div>
-            <div class="skill-item"><span class="skill-icon bootstrap">BS</span><span>Bootstrap</span></div>
+            <div class="skill-item"><span class="skill-icon html"><i class="fab fa-html5"></i></span><span>HTML</span></div>
+            <div class="skill-item"><span class="skill-icon css"><i class="fab fa-css3-alt"></i></span><span>CSS</span></div>
+            <div class="skill-item"><span class="skill-icon tailwind"><i class="fas fa-wind"></i></span><span>Tailwind</span></div>
+            <div class="skill-item"><span class="skill-icon bootstrap"><i class="fab fa-bootstrap"></i></span><span>Bootstrap</span></div>
+          </div>
+          <div class="skill-meter">
+            <div class="skill-meter-label"><span>Practical strength</span><span>90%</span></div>
+            <div class="skill-meter-track"><span class="skill-meter-fill"></span></div>
           </div>
         </div>
 
-        <div class="skill-card animate-on-scroll">
-          <h3>Backend</h3>
+        <div class="skill-card animate-on-scroll" style="--skill-level: 76%;">
+          <div class="skill-head">
+            <h3>Backend</h3>
+            <span class="skill-badge"><i class="fas fa-server"></i> APIs</span>
+          </div>
+          <p class="skill-summary">Building backend features with Java and Spring Boot, focusing on service logic and maintainable project structure.</p>
           <div class="skill-items">
-            <div class="skill-item"><span class="skill-icon spring">SB</span><span>Spring Boot</span></div>
+            <div class="skill-item"><span class="skill-icon spring"><i class="fas fa-leaf"></i></span><span>Spring Boot</span></div>
+          </div>
+          <div class="skill-meter">
+            <div class="skill-meter-label"><span>Practical strength</span><span>76%</span></div>
+            <div class="skill-meter-track"><span class="skill-meter-fill"></span></div>
           </div>
         </div>
 
-        <div class="skill-card animate-on-scroll">
-          <h3>Databases</h3>
+        <div class="skill-card animate-on-scroll" style="--skill-level: 74%;">
+          <div class="skill-head">
+            <h3>Databases</h3>
+            <span class="skill-badge"><i class="fas fa-database"></i> Data design</span>
+          </div>
+          <p class="skill-summary">Designing relational data models, writing queries, and connecting database thinking to real application needs.</p>
           <div class="skill-items">
-            <div class="skill-item"><span class="skill-icon mysql">My</span><span>MySQL</span></div>
+            <div class="skill-item"><span class="skill-icon mysql"><i class="fas fa-database"></i></span><span>MySQL</span></div>
+          </div>
+          <div class="skill-meter">
+            <div class="skill-meter-label"><span>Practical strength</span><span>74%</span></div>
+            <div class="skill-meter-track"><span class="skill-meter-fill"></span></div>
           </div>
         </div>
 
-        <div class="skill-card animate-on-scroll">
-          <h3>Tools</h3>
+        <div class="skill-card animate-on-scroll" style="--skill-level: 84%;">
+          <div class="skill-head">
+            <h3>Tools</h3>
+            <span class="skill-badge"><i class="fas fa-screwdriver-wrench"></i> Workflow</span>
+          </div>
+          <p class="skill-summary">Using developer tools to manage code, build faster, debug projects, and keep work organized across tasks.</p>
           <div class="skill-items">
-            <div class="skill-item"><span class="skill-icon git">Git</span><span>Git</span></div>
-            <div class="skill-item"><span class="skill-icon github-sk">GH</span><span>GitHub</span></div>
-            <div class="skill-item"><span class="skill-icon vscode">VS</span><span>VS Code</span></div>
-            <div class="skill-item"><span class="skill-icon intelij">IJ</span><span>Intelij</span></div>
-            <div class="skill-item"><span class="skill-icon replit">R</span><span>Replit</span></div>
+            <div class="skill-item"><span class="skill-icon git"><i class="fab fa-git-alt"></i></span><span>Git</span></div>
+            <div class="skill-item"><span class="skill-icon github-sk"><i class="fab fa-github"></i></span><span>GitHub</span></div>
+            <div class="skill-item"><span class="skill-icon vscode"><i class="fas fa-code"></i></span><span>VS Code</span></div>
+            <div class="skill-item"><span class="skill-icon intelij"><i class="fas fa-cube"></i></span><span>IntelliJ</span></div>
+            <div class="skill-item"><span class="skill-icon replit"><i class="fas fa-terminal"></i></span><span>Replit</span></div>
+          </div>
+          <div class="skill-meter">
+            <div class="skill-meter-label"><span>Practical strength</span><span>84%</span></div>
+            <div class="skill-meter-track"><span class="skill-meter-fill"></span></div>
           </div>
         </div>
 
@@ -945,10 +1460,18 @@
             <img src="Screenshot 2026-06-21 221941.png" alt="Car Service Maintenance and Tracking System" class="project-img-icon" />
           </div>
           <div class="project-body">
+            <div class="project-meta-row">
+              <span class="project-status"><i class="fas fa-layer-group"></i> Full-stack</span>
+              <span class="project-type"><i class="fas fa-gears"></i> Service system</span>
+            </div>
             <h3>
               Car Service Maintenance and Tracking System
             </h3>
             <p>A full-stack system for car service, maintenance and tracking with review system.</p>
+            <div class="project-impact">
+              <span><i class="fas fa-screwdriver-wrench"></i> Maintenance workflow</span>
+              <span><i class="fas fa-star-half-stroke"></i> Review module</span>
+            </div>
             <div class="tech-tags">
               <span class="tech-tag">Java</span>
               <span class="tech-tag">Spring Boot</span>
@@ -965,8 +1488,16 @@
             <img src="Screenshot 2026-06-21 213946.png" alt="Personal Portfolio Website" class="project-img-icon" />
           </div>
           <div class="project-body">
+            <div class="project-meta-row">
+              <span class="project-status"><i class="fas fa-globe"></i> Live portfolio</span>
+              <span class="project-type"><i class="fas fa-wand-magic-sparkles"></i> Personal brand</span>
+            </div>
             <h3>Personal Portfolio Website</h3>
             <p>A modern, responsive personal portfolio showcasing projects, skills, and contact information.</p>
+            <div class="project-impact">
+              <span><i class="fas fa-mobile-screen"></i> Responsive design</span>
+              <span><i class="fas fa-bolt"></i> Interactive sections</span>
+            </div>
             <div class="tech-tags">
               <span class="tech-tag">HTML</span>
               <span class="tech-tag">CSS</span>
@@ -984,8 +1515,16 @@
             <img src="Study Track SS.png" alt="StudyTrack System" class="project-img-icon" />
           </div>
           <div class="project-body">
+            <div class="project-meta-row">
+              <span class="project-status"><i class="fas fa-calendar-check"></i> Productivity</span>
+              <span class="project-type"><i class="fas fa-chart-line"></i> Student app</span>
+            </div>
             <h3>StudyTrack System</h3>
             <p>A fully client-side web app that helps students organize their academic life.</p>
+            <div class="project-impact">
+              <span><i class="fas fa-calendar-days"></i> Calendar planning</span>
+              <span><i class="fas fa-chart-pie"></i> Progress charts</span>
+            </div>
             <div class="tech-tags">
               <span class="tech-tag">HTML</span>
               <span class="tech-tag">CSS</span>
@@ -1007,8 +1546,16 @@
             <img src="ExpenseTracker SS.png" alt="SmartExpense Tracker" class="project-img-icon" />
           </div>
           <div class="project-body">
+            <div class="project-meta-row">
+              <span class="project-status"><i class="fas fa-wallet"></i> Finance tool</span>
+              <span class="project-type"><i class="fab fa-react"></i> React build</span>
+            </div>
             <h3>SmartExpense Tracker</h3>
             <p>Smart Expense Tracker is a personal finance management tool that allows users to effortlessly log daily transactions, categorize their expenditures, and gain clear insights into their spending habits to budget more effectively.</p>
+            <div class="project-impact">
+              <span><i class="fas fa-receipt"></i> Transaction logs</span>
+              <span><i class="fas fa-chart-simple"></i> Spending insights</span>
+            </div>
             <div class="tech-tags">
               <span class="tech-tag">HTML</span>
               <span class="tech-tag">CSS</span>
@@ -1034,58 +1581,99 @@
         <h2>Experience</h2>
         <p>My journey so far.</p>
       </div>
+      <div class="experience-overview animate-on-scroll">
+        <div class="experience-stat">
+          <i class="fas fa-diagram-project"></i>
+          <strong>4+ Projects</strong>
+          <span>Academic and personal builds</span>
+        </div>
+        <div class="experience-stat">
+          <i class="fas fa-code-branch"></i>
+          <strong>Full-Stack Practice</strong>
+          <span>Frontend, backend, and databases</span>
+        </div>
+        <div class="experience-stat">
+          <i class="fas fa-trophy"></i>
+          <strong>National Athlete</strong>
+          <span>Leadership under pressure</span>
+        </div>
+        <div class="experience-stat">
+          <i class="fas fa-certificate"></i>
+          <strong>Continuous Learning</strong>
+          <span>Courses, certificates, and labs</span>
+        </div>
+      </div>
       <div class="timeline">
 
         <div class="timeline-item animate-on-scroll">
-          <div class="timeline-dot"></div>
+          <div class="timeline-dot"><i class="fas fa-briefcase"></i></div>
           <div class="timeline-card">
             <div class="timeline-header">
-              <span class="timeline-badge current">Current</span>
+              <span class="timeline-badge current"><i class="fas fa-circle-dot"></i> Current</span>
               <span class="timeline-date">2026 — Present</span>
             </div>
             <h3>Still Not Open to Internships</h3>
             <p class="timeline-org">Software Development</p>
             <p>Actively seeking software development internship opportunities to apply my skills in a professional environment and gain hands-on industry experience.</p>
+            <div class="timeline-focus">
+              <span><i class="fas fa-laptop-code"></i> Software development</span>
+              <span><i class="fas fa-people-group"></i> Team-ready mindset</span>
+            </div>
           </div>
         </div>
 
         <div class="timeline-item animate-on-scroll">
-          <div class="timeline-dot"></div>
+          <div class="timeline-dot"><i class="fas fa-code"></i></div>
           <div class="timeline-card">
             <div class="timeline-header">
-              <span class="timeline-badge">Academic</span>
+              <span class="timeline-badge"><i class="fas fa-graduation-cap"></i> Academic</span>
               <span class="timeline-date">2025 - Present</span>
             </div>
             <h3>University Projects</h3>
             <p class="timeline-org">B.Sc. Information Technology</p>
             <p>Contributed to multiple full-stack academic projects covering web development, database design, and software engineering principles including agile methodologies.</p>
+            <div class="timeline-focus">
+              <span><i class="fas fa-database"></i> Database design</span>
+              <span><i class="fas fa-layer-group"></i> Full-stack projects</span>
+              <span><i class="fas fa-users-gear"></i> Agile principles</span>
+            </div>
           </div>
         </div>
 
         <div class="timeline-item animate-on-scroll">
-          <div class="timeline-dot"></div>
+          <div class="timeline-dot"><i class="fas fa-medal"></i></div>
           <div class="timeline-card">
             <div class="timeline-header">
-              <span class="timeline-badge">Sports</span>
+              <span class="timeline-badge"><i class="fas fa-trophy"></i> Sports</span>
               <span class="timeline-date">2011 - 2024</span>
             </div>
             <h3>National Badminton Player</h3>
             <p class="timeline-org">Selected to National Junior Badminton Pool in 2015 </p>
               <p> Current National Ranking - Open Men's Singles No.29 & Doubles No.25 </p>
             <p>2023 School Badminton Captain. Won the 1st Place on National School Games 2023. National Sport Colorsman.</p>
+            <div class="timeline-focus">
+              <span><i class="fas fa-ranking-star"></i> National ranking</span>
+              <span><i class="fas fa-user-shield"></i> Captaincy</span>
+              <span><i class="fas fa-award"></i> School colors</span>
+            </div>
           </div>
         </div>
 
         <div class="timeline-item animate-on-scroll">
-          <div class="timeline-dot"></div>
+          <div class="timeline-dot"><i class="fas fa-book-open-reader"></i></div>
           <div class="timeline-card">
             <div class="timeline-header">
-              <span class="timeline-badge">Self-Directed</span>
+              <span class="timeline-badge"><i class="fas fa-bolt"></i> Self-Directed</span>
               <span class="timeline-date">Present</span>
             </div>
             <h3>Self-Directed Learning</h3>
             <p class="timeline-org">Online Platforms</p>
             <p>Completing online courses and built personal projects in Java, JavaScript, and cloud technologies. Continuously expanding skills through platforms like Coursera, Codedex, and freeCodeCamp.</p>
+            <div class="timeline-focus">
+              <span><i class="fas fa-cloud"></i> Cloud basics</span>
+              <span><i class="fas fa-certificate"></i> Certifications</span>
+              <span><i class="fas fa-hammer"></i> Practice builds</span>
+            </div>
           </div>
         </div>
 
@@ -1100,13 +1688,28 @@
         <h2>Education</h2>
         <p>My academic background.</p>
       </div>
-      <div class="edu-card animate-on-scroll">
+      <div class="edu-card featured-edu animate-on-scroll">
         <div class="edu-icon"><i class="fas fa-university"></i></div>
         <div class="edu-body">
-          <h3>Bachelor of Information Technology</h3>
+          <div class="edu-title-row">
+            <h3>Bachelor of Information Technology</h3>
+            <span class="edu-status"><i class="fas fa-graduation-cap"></i> Current</span>
+          </div>
           <p class="edu-uni">Sri Lanka Institute of Information Technology</p>
-          <p class="edu-year">Expected Graduation: 2029</p>
-          <p class="edu-year">Current GPA: 3.52</p>
+          <div class="edu-meta-grid">
+            <div class="edu-stat">
+              <strong>3.52</strong>
+              <span>Current GPA</span>
+            </div>
+            <div class="edu-stat">
+              <strong>2029</strong>
+              <span>Expected graduation</span>
+            </div>
+            <div class="edu-stat">
+              <strong>IT</strong>
+              <span>Degree focus</span>
+            </div>
+          </div>
           <div class="edu-courses">
             <h4>Relevant Coursework</h4>
             <div class="course-tags">
@@ -1125,11 +1728,25 @@
       <div class="edu-card animate-on-scroll">
         <div class="edu-icon"><i class="fas fa-school"></i></div>
         <div class="edu-body">
-          <h3>School Education</h3>
+          <div class="edu-title-row">
+            <h3>School Education</h3>
+            <span class="edu-status"><i class="fas fa-medal"></i> Completed</span>
+          </div>
           <p class="edu-uni">D.S.Senanayake College Colombo 07</p>
-          <p class="edu-year">2011 - 2024</p>
-          <p class="edu-year">Advanced Level - C2 and S1 (General English - A)</p>
-          <p class="edu-year">Ordinary Level - A6, B1 and C2</p>
+          <div class="edu-meta-grid">
+            <div class="edu-stat">
+              <strong>2011-2024</strong>
+              <span>Academic journey</span>
+            </div>
+            <div class="edu-stat">
+              <strong>C2 S1</strong>
+              <span>Advanced Level</span>
+            </div>
+            <div class="edu-stat">
+              <strong>A6 B1 C2</strong>
+              <span>Ordinary Level</span>
+            </div>
+          </div>
           <div class="edu-courses">
             <h4>Highlights</h4>
             <div class="course-tags">
