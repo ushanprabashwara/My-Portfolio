@@ -672,6 +672,44 @@
       margin-top: auto;
     }
 
+    .fleet-project {
+      border-color: rgba(245, 158, 11, 0.42);
+    }
+
+    .fleet-project::before {
+      background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.18), transparent 40%);
+      opacity: 1;
+    }
+
+    .fleet-project:hover {
+      border-color: rgba(245, 158, 11, 0.72);
+      box-shadow: 0 20px 46px rgba(120, 72, 8, 0.2);
+    }
+
+    .fleet-project .project-status {
+      color: #b45309;
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.28);
+    }
+
+    .fleet-project .project-type {
+      color: var(--text);
+      background: rgba(15, 23, 42, 0.07);
+      border-color: var(--border);
+    }
+
+    .project-link-static {
+      cursor: default;
+      color: var(--text-muted);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+    }
+
+    .project-link-static:hover {
+      color: var(--text-muted);
+      transform: none;
+    }
+
     .edu-card {
       position: relative;
       overflow: hidden;
@@ -1265,7 +1303,7 @@
         <div class="hero-highlights">
           <div class="hero-highlight">
             <i class="fas fa-code"></i>
-            <strong><span class="count-up" data-count="4">0</span><span class="stat-suffix">+</span></strong>
+            <strong><span class="count-up" data-count="5">0</span><span class="stat-suffix">+</span></strong>
             <span class="stat-label">Projects</span>
           </div>
           <div class="hero-highlight">
@@ -1570,6 +1608,29 @@
           </div>
         </div>
 
+        <div class="project-card fleet-project animate-on-scroll">
+          <div class="project-img" style="background: linear-gradient(135deg,#F59E0B,#1C1917);">
+            <img src="Fleet Master JCB Management System SS.png" alt="Fleet Master JCB Management System" class="project-img-icon" />
+          </div>
+          <div class="project-body">
+            <div class="project-meta-row">
+              <span class="project-status"><i class="fas fa-tractor"></i> Fleet operations</span>
+              <span class="project-type"><i class="fas fa-shield-halved"></i> Role-based platform</span>
+            </div>
+            <h3>Fleet Master JCB Management System</h3>
+            <p>A connected JCB fleet management platform for coordinating bookings, machine records, maintenance, damage reports, customer feedback, and finance.</p>
+            <div class="project-impact">
+              <span><i class="fas fa-layer-group"></i> 6 connected modules</span>
+              <span><i class="fas fa-users-gear"></i> 5 user roles</span>
+            </div>
+            <div class="tech-tags">
+              <span class="tech-tag">Fleet Management</span>
+              <span class="tech-tag">Role-Based Access</span>
+              <span class="tech-tag">Operations Dashboard</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1584,7 +1645,7 @@
       <div class="experience-overview animate-on-scroll">
         <div class="experience-stat">
           <i class="fas fa-diagram-project"></i>
-          <strong>4+ Projects</strong>
+          <strong>5+ Projects</strong>
           <span>Academic and personal builds</span>
         </div>
         <div class="experience-stat">
@@ -2140,7 +2201,7 @@
               <span>Current GPA</span>
             </div>
             <div class="resume-highlight">
-              <strong>4+</strong>
+              <strong>5+</strong>
               <span>Projects</span>
             </div>
             <div class="resume-highlight">
