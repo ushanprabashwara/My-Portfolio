@@ -143,6 +143,45 @@ if (motionSafe && window.matchMedia('(pointer: fine)').matches) {
   });
 }
 
+/* ===== CERTIFICATE DETAILS MODAL ===== */
+const certificateModal = document.getElementById('intelliConCertificateModal');
+const certificateModalDialog = certificateModal?.querySelector('.certificate-modal-dialog');
+const openCertificateButton = document.getElementById('openIntelliConCertificate');
+const closeCertificateButton = document.getElementById('closeIntelliConCertificate');
+
+function openCertificateModal() {
+  if (!certificateModal) return;
+
+  certificateModal.classList.add('is-open');
+  certificateModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('certificate-modal-opened');
+  certificateModalDialog?.focus();
+}
+
+function closeCertificateModal() {
+  if (!certificateModal) return;
+
+  certificateModal.classList.remove('is-open');
+  certificateModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('certificate-modal-opened');
+  openCertificateButton?.focus();
+}
+
+openCertificateButton?.addEventListener('click', openCertificateModal);
+closeCertificateButton?.addEventListener('click', closeCertificateModal);
+
+certificateModal?.addEventListener('click', event => {
+  if (event.target === certificateModal) {
+    closeCertificateModal();
+  }
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && certificateModal?.classList.contains('is-open')) {
+    closeCertificateModal();
+  }
+});
+
 /* ===== CONTACT FORM VALIDATION ===== */
 const contactForm = document.getElementById('contactForm');
 const formSuccess = document.getElementById('formSuccess');
